@@ -1,17 +1,8 @@
-<div class="row justify-content-center">
-    <div class="col-4">
-        <form (ngSubmit)="onSubmitLogin()" #loginForm="ngForm">
-            <div class="form-outline mb-4">
-                <input class="form-control" type="login" id="login" name="login" [(ngModel)]="login">
-                <label class="form-control" for="login">Usuário:</label>
-            </div>
-
-            <div class="form-outline mb-4">
-                <input class="form-control" type="password" id="password" name="password" [(ngModel)]="password">
-                <label class="form-control" for="password">Senha:</label>
-            </div>
-
-            <button type="submit" class="btn btn-primary btn-block mb-4">Confirmar</button>
-        </form>
-    </div>
+<div class="container-login">
+    <h1 class="login-title">Login</h1>
+    <form (ngSubmit)="onSubmitLogin()" #loginForm="ngForm">
+      <input class="login-input" type="login" id="login" name="login" [(ngModel)]="login" placeholder="Digite seu usuário">
+      <input class="login-input" type="password" id="password" name="password" [(ngModel)]="password" placeholder="Digite sua senha">
+      <button type="submit" class="login-button">Confirmar</button>
+    </form>
 </div>
