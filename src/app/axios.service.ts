@@ -6,8 +6,14 @@ import axios from 'axios';
 })
 export class AxiosService {
 
+  BASE_CONFIG : string = "prod"; // Alterar para "dev" para rodar localmente
+
   constructor() {
-    axios.defaults.baseURL = 'http://localhost:8081/api/v1';
+    if (this.BASE_CONFIG == "prod") {
+      axios.defaults.baseURL = 'https://spring-boot-company-ctrl.azurewebsites.net/api/v1';
+    } else {
+      axios.defaults.baseURL = 'http://localhost:8081/api/v1';
+    }
     axios.defaults.headers.post['Content-Type'] = 'application/json';
   }
 
