@@ -1,7 +1,8 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { Contact } from '../model/contact';
+import { ContactService } from '../services/contact.service';
 
 @Component({
   selector: 'app-contact',
@@ -10,24 +11,21 @@ import { Contact } from '../model/contact';
   standalone: true,
   imports: [MatTableModule, MatPaginatorModule],
 })
-export class ContactComponent implements AfterViewInit {
+export class ContactComponent implements AfterViewInit, OnInit {
 
-  ELEMENT_DATA: Contact[] = [
-    {
-      _id: 1,
-      active: true,
-      email: 'string',
-      phone: 'string',
-      cellPhone: 'string',
-      name: 'string',
-      lastName: 'string',
-      cpfCnpj: 'string',
-      rgIe: 'string',
-    }
-  ];
+  contacts: Contact[] = [];
+
+  constructor(private contactService: ContactService) {
+
+  }
+
+  ngOnInit(): void {
+    this.contacts = this.contactService.listContacts();
+    console.log(this.contacts);
+  }
 
   displayedColumns: string[] = ['_id', 'active', 'email', 'phone', 'cellPhone', 'name', 'cpfCnpj', 'rgIe'];
-  dataSource = new MatTableDataSource<Contact>(this.ELEMENT_DATA);
+  dataSource = new MatTableDataSource<Contact>(this.contacts);
 
   @ViewChild(MatPaginator) paginator: any;
 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AxiosService } from '../axios.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-content',
@@ -10,7 +11,7 @@ export class ContentComponent {
 
   componentToShow = 'welcome';
 
-  constructor(private axiosService: AxiosService) { }
+  constructor(private axiosService: AxiosService, private router: Router) { }
 
   showComponent(componentToShow: string): void {
     this.componentToShow = componentToShow;
@@ -27,8 +28,14 @@ export class ContentComponent {
       "/auth/signin",
       JSON.stringify(data)
     ).then(response => {
-      this.axiosService.setAuthToken(response.data.accessToken);
-      this.componentToShow = 'auth';
+      // console.log(response.data);
+      this.axiosService.setAuthToken(response.data.acessToken);
+      // if (response.data.role === 'ROLE_ADMIN') {
+      //   this.router.navigate(['/admin']);
+      // }
+      if (this.axiosService.getAuthToken() != null) {
+        this.router.navigate(['/home']);
+      }
     });
   }
 }

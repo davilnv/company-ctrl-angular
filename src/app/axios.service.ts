@@ -6,7 +6,7 @@ import axios from 'axios';
 })
 export class AxiosService {
 
-  BASE_CONFIG : string = "prod"; // Alterar para "dev" para rodar localmente
+  BASE_CONFIG : string = "dev"; // Alterar para "dev" para rodar localmente
 
   constructor() {
     if (this.BASE_CONFIG == "prod") {

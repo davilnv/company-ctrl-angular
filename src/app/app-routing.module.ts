@@ -1,16 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ContentComponent } from './content/content.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
+    title: 'CompanyCTRL',
     path: '',
-    pathMatch:'full',
-    redirectTo: 'contact'
+    component : ContentComponent
   },
   {
+    title: 'Home',
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+  },
+  {
+    title: 'Cliente/Fornecedor',
     path: 'contact',
     loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule)
-  }
+  },
 ];
 
 @NgModule({
